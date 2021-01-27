@@ -20,6 +20,7 @@ int main()
     para nova linha (\n) e imprimindo uma string
     */
     printf("Hello, World!\n%s",s);
-        
+    getchar();
+    getchar();    
     return 0;
 }
