@@ -2,12 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define true 1
+#define false 0
+
 int str_qsortcmp (const void * a, const void * b ) {
     const char **pa = (const char**)a;
     const char **pb = (const char**)b;
 
     return strcmp(*pa,*pb);
 }
+
 int next_permutation(int n, char **s)
 {
 	/**
@@ -15,7 +19,8 @@ int next_permutation(int n, char **s)
 	* Return 0 when there is no next permutation and 1 otherwise
 	* Modify array s to its next permutation
 	*/
-	int i,j,k=0;
+	int i,j,there_is_next = false;
+	
 	char *swap =(char*)malloc(11*sizeof(char));
 
 	for (int i=n-1;i>0;i--)
@@ -25,28 +30,32 @@ int next_permutation(int n, char **s)
 			strcpy(swap,*(s+i-1));
 			strcpy(*(s+i-1),*(s+i));
 			strcpy(*(s+i),swap);
-			k=1;
+			there_is_next = true;
 			break;
 
 		} else if (strcmp(*(s+i),*(s+i-1))>0 && (i<n-1)){
 
 			strcpy(swap,*(s+i-1));
-			qsort(s+i,n-i,sizeof(char*),str_qsortcmp);
-
-			for (j=i;j<n;j++){
-
-				if (strcmp(swap,*(s+j))<0){
-
+			for (j = n-1; j>=i;j--){
+			
+				if(strcmp (*(s+j),swap)>0){
+				
 					strcpy(*(s+i-1),*(s+j));
 					strcpy(*(s+j),swap);
-					k=1;
 					break;
+					
 				}
+				
 			}
+			qsort(s+i,n-i,sizeof(char*),str_qsortcmp);
+			there_is_next = true;
+			break;
+				
 		}
 	}
+	
 	free(swap);
-	return(k);
+	return(there_is_next);
 
 }
 
