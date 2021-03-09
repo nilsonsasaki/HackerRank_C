@@ -16,6 +16,16 @@ long int calculate_perimeter (int a, int b, int c){
 	return(perimeter);  
 }
 
+long square_of_area (int a, int b, int c){
+
+	
+	long int p = (calculate_perimeter (a,b,c))/2;
+	long int sq_of_area = p*(p-a)*(p-b)*(p-c);
+	
+	return (sq_of_area);
+	
+}
+
 void sort_by_area(triangle* tr, int n) {
 
 	long int *areas = malloc (n*sizeof(long int));
