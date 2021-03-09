@@ -7,7 +7,7 @@ int main() {
 
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */
     char input[1000];
-    int occurs[10];
+    int occurs[11];
     
     scanf("%s",input);
     for (int i=0;i<10;i++){
