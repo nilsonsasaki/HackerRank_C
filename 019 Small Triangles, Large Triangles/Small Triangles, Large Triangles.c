@@ -8,9 +8,18 @@ struct triangle
 	int b;
 	int c;
 };
-
 typedef struct triangle triangle;
+
+long int calculate_perimeter (int a, int b, int c){
+
+	long int perimeter = (long int) a + (long int) b + (long int) c;
+	return(perimeter);  
+}
+
 void sort_by_area(triangle* tr, int n) {
+
+	long int *areas = malloc (n*sizeof(long int));
+	
 
 	/**
 	* Sort an array a of the length n
