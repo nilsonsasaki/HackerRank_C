@@ -26,11 +26,36 @@ long square_of_area (int a, int b, int c){
 	
 }
 
+void get_all_areas (triangle* tr, int n, long int* areas){
+
+	for (int i=0; i<n; i++){
+		
+		*(areas+i) = square_of_area((triangle+i)->a,(triangle+i)->b,(triangle+i)->c);
+			
+	}
+}
+
+void swap_area (long int *a, long int *b){
+
+	long int area_swap = *a;
+	*a = *b;
+	*b = area_swap;
+	
+}
+
+
 void sort_by_area(triangle* tr, int n) {
 
 	long int *areas = malloc (n*sizeof(long int));
 	
-
+	triangle tringle_swap;
+	
+	get_all_areas (tr, n, areas);
+	
+	for(int i=0; i<n;i++){
+	
+		
+	}
 	/**
 	* Sort an array a of the length n
 	*/
