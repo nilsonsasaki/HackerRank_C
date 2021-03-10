@@ -35,19 +35,25 @@ void get_all_areas (triangle* tr, int n, long int* areas){
     }
 }
 
-void put_before_first (int item_index,int first_index, long int *areas,  triangle * tr){
+void put_before_first (int item_index,int first_index, long int *areas,  triangle * tr,int n){
 
 
 	long int area_swap = areas[item_index];
 	triangle tr_swap = tr[item_index];
 	
-	for (int i=item_index; i>=0;i--){
+	for (int i=item_index; i>first_index;i--){
 
 		areas[i] = areas[i-1];
 		tr[i] = tr[i-1];
 	}
 	areas[first_index] = area_swap;
 	tr[first_index] = tr_swap;
+	
+	printf ("\n");
+	for (int i = 0; i < n; i++) {
+		printf("%d %d %d\n", tr[i].a, tr[i].b, tr[i].c);
+	}
+	printf ("\n");
 	
 }
 
@@ -59,11 +65,12 @@ void sort_by_area(triangle* tr, int n) {
     
     for(int i=0; i<n-1;i++){
     
-        for (int j=1; j<n; j++){
+        for (int j=i+1; j<n; j++){
         
             if (areas[i]> areas[j]){
             
-                put_before_first(j,i,areas,tr);
+            	printf("i=%d>j=%d\n",i,j);
+                put_before_first(j,i,areas,tr,n);
             }
         }
     }
