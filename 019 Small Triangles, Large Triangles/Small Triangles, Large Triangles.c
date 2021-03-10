@@ -43,6 +43,13 @@ void swap_area (long int *a, long int *b){
 	
 }
 
+void swap_triangle (triangle* tr1, triangle* tr2){
+
+	triangle triangle_swap = *tr1;
+	*tr1 =*tr2;
+	*tr2 = triangle_swap;
+}
+
 
 void sort_by_area(triangle* tr, int n) {
 
