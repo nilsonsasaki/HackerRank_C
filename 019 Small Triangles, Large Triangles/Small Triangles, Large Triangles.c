@@ -16,17 +16,17 @@ long int calculate_perimeter (int a, int b, int c){
     return(perimeter);  
 }
 
-long square_of_area (int a, int b, int c){
+double square_of_area (int a, int b, int c){
 
     
-    long int p = (calculate_perimeter (a,b,c))/2;
-    long int sq_of_area = p*(p-a)*(p-b)*(p-c);
+    double p = (double)(calculate_perimeter (a,b,c))/2;
+    double sq_of_area = p*(p-a)*(p-b)*(p-c);
     
     return (sq_of_area);
     
 }
 
-void get_all_areas (triangle* tr, int n, long int* areas){
+void get_all_areas (triangle* tr, int n, double* areas){
 
     for (int i=0; i<n; i++){
         
@@ -35,10 +35,10 @@ void get_all_areas (triangle* tr, int n, long int* areas){
     }
 }
 
-void put_before_first (int item_index,int first_index, long int *areas,  triangle * tr,int n){
+void put_before_first (int item_index,int first_index, double *areas,  triangle * tr,int n){
 
 
-	long int area_swap = areas[item_index];
+	double area_swap = areas[item_index];
 	triangle tr_swap = tr[item_index];
 	
 	for (int i=item_index; i>first_index;i--){
@@ -49,18 +49,12 @@ void put_before_first (int item_index,int first_index, long int *areas,  triangl
 	areas[first_index] = area_swap;
 	tr[first_index] = tr_swap;
 	
-	printf ("\n");
-	for (int i = 0; i < n; i++) {
-		printf("%d %d %d\n", tr[i].a, tr[i].b, tr[i].c);
-	}
-	printf ("\n");
-	
 }
 
 
 void sort_by_area(triangle* tr, int n) {
 
-    long int *areas = malloc (n*sizeof(long int));
+    double *areas = malloc (n*sizeof(long int));
     get_all_areas (tr, n, areas);
     
     for(int i=0; i<n-1;i++){
@@ -69,7 +63,6 @@ void sort_by_area(triangle* tr, int n) {
         
             if (areas[i]> areas[j]){
             
-            	printf("i=%d>j=%d\n",i,j);
                 put_before_first(j,i,areas,tr,n);
             }
         }
