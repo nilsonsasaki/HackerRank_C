@@ -43,7 +43,15 @@ int sort_by_length(const char* a, const char* b) {
 		}
 		index++;
 	}
-	return((a>b)?a:b);
+	
+	if(a_length == b_length)
+		return(0);
+	
+	if(a_length >b_length)
+		return(1);
+	
+	if(a_length<b_length)
+		return(-1);
 }
 
 void string_sort(char** arr,const int len,int (*cmp_func)(const char* a, const char* b)){
