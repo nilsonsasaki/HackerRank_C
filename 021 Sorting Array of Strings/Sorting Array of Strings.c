@@ -4,6 +4,7 @@
 
 int lexicographic_sort(const char* a, const char* b) {
 	
+	return(strcmp(a,b));
 	
 }
 
