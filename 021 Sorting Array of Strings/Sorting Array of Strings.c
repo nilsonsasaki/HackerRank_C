@@ -76,12 +76,12 @@ int sort_by_length(const char* a, const char* b) {
 	int is_end_of_b = 0;
 	int index=0;
 	
-	while (!is_end_of_a && !is end of b){
+	while (!is_end_of_a && !is_end_of_b){
 	
-		if(*(a+index)=='\0'&& is_end_of_a==0)
+		if(a[index]=='\0'&& is_end_of_a==0)
 			is_end_of_a=1;
 		
-		if(*(b+index)=='\0' && is_end_of_b==0)
+		if(b[index]=='\0' && is_end_of_b==0)
 			is_end_of_b=1;
 		
 		if (is_end_of_a==0){
