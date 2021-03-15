@@ -15,9 +15,56 @@ int lexicographic_sort_reverse(const char* a, const char* b) {
 
 int sort_by_number_of_distinct_characters(const char* a, const char* b) {
 
+	*int a_ascii_list = calloc (256, sizeof(int));
+	*int b_ascii_list = calloc (256, sizeof(int));
+	int is_end_of_a = 0;
+	int is_end_of_b = 0;
+	int index = 0;
+	int a_distinct_characters, b_distinct_characters;
+	unsigned int ascii;
 	
-}
+	while (!is_end_of_a && !is end of b){
+	
+		if(*(a+index)=='\0'&& is_end_of_a==0)
+			is_end_of_a=1;
+		
+		if(*(b+index)=='\0' && is_end_of_b==0)
+			is_end_of_b=1;
+		
+		if(!is_end_of_a){
+		
+			ascii = (unsigned int)*(a+index);
+			a_ascii_list[ascii]++;
+		}
+		
+		if(!is_end_of_b){
+		
+			ascii = (unsigned int)*(b+index);
+			b_ascii_list[ascii]++;
+		}
+		
+		for(int i=0;i<256;i++){
+			
+			a_distinct_characters = a_distinct_characters + a_ascii_list[i];
+			free(a_ascii_list);
+			b_distinct_characters = b_distinct_characters + b_ascii_list[i];
+			free(b_ascii_list);
+		}
+		
 
+		index++;
+	}
+	
+	if(a_distinct_characters == b_distinct_characters)
+		return(0);
+	
+	if(a_distinct_characters >b_distinct_characters)
+		return(1);
+	
+	if(a_distinct_characters >b_distinct_characters)
+		return(-1);
+}
+	
 int sort_by_length(const char* a, const char* b) {
 
 	int a_length =0, b_length=0;
