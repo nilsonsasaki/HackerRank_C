@@ -140,6 +140,14 @@ void string_sort(char** arr,const int len,int (*cmp_func)(const char* a, const c
 			
 				swap_string(arr[i],arr[i+1]);
 				is_finished=0;
+				
+			} else if(((*cmp_func)(arr[i],arr[i+1]))==0){
+			
+				if (strcmp(arr[i],arr[i+1])>0){
+				
+					swap_string(arr[i],arr[i+1]);
+					is_finished=0;
+				}
 			}
 		}
 		count--;
