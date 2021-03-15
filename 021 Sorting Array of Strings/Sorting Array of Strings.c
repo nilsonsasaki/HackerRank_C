@@ -106,8 +106,44 @@ int sort_by_length(const char* a, const char* b) {
 		return(-1);
 }
 
+void swap_string(char *a, char *b){
+
+	 unsigned int a_length = strlen(a);
+	 unsigned int b_length =strlen(b);
+	 char *swap;
+	 
+	 if (a_length>b_length){
+	 	swap = malloc(a_length*sizeof(char));
+	 
+	 } else {
+	 	swap = malloc(b_length*sizeof(char));
+	 }
+	 strcpy(swap, a);
+	 strcpy(a,b);
+	 strcpy(b,swap);
+	 free(swap);
+	 
+}
+
 void string_sort(char** arr,const int len,int (*cmp_func)(const char* a, const char* b)){
 
+	int is_finished =0;
+	
+	int count = len;
+	
+	while (!is_finished){
+	
+		is_finished=1;
+		for (int i=0;i<count-1;i++){
+		
+			if(((*cmp_func)(arr[i],arr[i+1]))>0){
+			
+				swap_string(arr[i],arr[i+1]);
+				is_finished=0;
+			}
+		}
+		count--;
+	}
 }
 
 
