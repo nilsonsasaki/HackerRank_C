@@ -13,97 +13,67 @@ int lexicographic_sort_reverse(const char* a, const char* b) {
 	return(strcmp(b,a));
 }
 
+int number_of_distinct_characters(const char *a){
+
+	char distinct_characters [27];
+	int i=0, distinct_characters_count =0;
+	int is_new = 1;
+	while (a[i]!='\0'){
+	
+		if (distinct_characters_count !=0){
+		
+			for (int j=0;j<distinct_characters_count;j++){
+			
+				if(distinct_characters[j]==a[i]){
+				
+					is_new=0;
+					break;
+				}
+			}
+			
+		}
+		if(is_new){
+		
+			distinct_characters[distinct_characters_count] = a[i];
+			distinct_characters_count++;
+		}
+		is_new = 1;
+		i++;
+	}
+	return (distinct_characters_count);
+}
 int sort_by_number_of_distinct_characters(const char* a, const char* b) {
 
-	int *a_ascii_list = calloc (256, sizeof(int));
-	int *b_ascii_list = calloc (256, sizeof(int));
-	int is_end_of_a = 0;
-	int is_end_of_b = 0;
-	int index = 0;
-	unsigned int a_distinct_characters =0, b_distinct_characters=0;
-	unsigned int ascii=0;
+	int a_count = number_of_distinct_characters(a);
+	int b_count = number_of_distinct_characters(b);
 	
-	while (!is_end_of_a && !is_end_of_b){
+	if(a_count >b_count){
 	
-		if(*(a+index)=='\0'&& is_end_of_a==0)
-			is_end_of_a=1;
-		
-		if(*(b+index)=='\0' && is_end_of_b==0)
-			is_end_of_b=1;
-		
-		if(!is_end_of_a){
-		
-			ascii = (unsigned int)*(a+index);
-			a_ascii_list[ascii]++;
-		}
-		
-		if(!is_end_of_b){
-		
-			ascii = (unsigned int)*(b+index);
-			b_ascii_list[ascii]++;
-		}
-					
-		index++;
-	}
-	
-	for(int i=0;i<256;i++){
-			
-		if(a_ascii_list[i]>0)
-			a_distinct_characters++;
-			
-		if(b_ascii_list[i]>0)
-			b_distinct_characters++;
-			
-	}
-	
-	free(a_ascii_list);
-	free(b_ascii_list);
-	
-	if(a_distinct_characters == b_distinct_characters)
-		return(0);
-	
-	if(a_distinct_characters >b_distinct_characters)
 		return(1);
+		
+	} else if (a_count <b_count){
 	
-	if(a_distinct_characters <b_distinct_characters)
-		return(-1);
+		return (-1);
+	}
+	
+	return(strcmp(a,b));
 }
 	
 int sort_by_length(const char* a, const char* b) {
 
-	int a_length =0, b_length=0;
-	int is_end_of_a = 0;
-	int is_end_of_b = 0;
-	int index=0;
+	unsigned int a_length = strlen(a);
+	unsigned int b_length = strlen(b);
+		
+	if(a_length > b_length){
 	
-	while (!is_end_of_a && !is_end_of_b){
-	
-		if(a[index]=='\0'&& is_end_of_a==0)
-			is_end_of_a=1;
-		
-		if(b[index]=='\0' && is_end_of_b==0)
-			is_end_of_b=1;
-		
-		if (is_end_of_a==0){
-		
-			a_length++;
-		}
-		
-		if (is_end_of_b==0){
-		
-			b_length++;
-		}
-		index++;
-	}
-	
-	if(a_length == b_length)
-		return(0);
-	
-	if(a_length >b_length)
 		return(1);
 	
-	if(a_length<b_length)
+	}else if (a_length < b_length){
+	
 		return(-1);
+	}
+	
+	return(strcmp(a,b));
 }
 
 void swap_string(char *a, char *b){
@@ -112,14 +82,11 @@ void swap_string(char *a, char *b){
 	 unsigned int b_length =strlen(b);
 	 char *swap;
 	 
-	 if (a_length>b_length){
-	 	swap = malloc(a_length*sizeof(char));
-	 
-	 } else {
-	 	swap = malloc(b_length*sizeof(char));
-	 }
+	 swap = malloc((a_length+1)*sizeof(char));
 	 strcpy(swap, a);
+	 a = realloc(a,(b_length+1)*sizeof(char));
 	 strcpy(a,b);
+	 b = realloc(b,(a_length+1)*sizeof(char));
 	 strcpy(b,swap);
 	 free(swap);
 	 
@@ -141,13 +108,6 @@ void string_sort(char** arr,const int len,int (*cmp_func)(const char* a, const c
 				swap_string(arr[i],arr[i+1]);
 				is_finished=0;
 				
-			} else if(((*cmp_func)(arr[i],arr[i+1]))==0){
-			
-				if (strcmp(arr[i],arr[i+1])>0){
-				
-					swap_string(arr[i],arr[i+1]);
-					is_finished=0;
-				}
 			}
 		}
 		count--;
