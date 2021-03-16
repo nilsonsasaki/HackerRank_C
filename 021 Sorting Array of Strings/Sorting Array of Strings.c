@@ -76,20 +76,11 @@ int sort_by_length(const char* a, const char* b) {
 	return(strcmp(a,b));
 }
 
-void swap_string(char *a, char *b){
+void swap_string(char **a, char **b){
 
-	 unsigned int a_length = strlen(a);
-	 unsigned int b_length =strlen(b);
-	 char *swap;
-	 
-	 swap = malloc((a_length+1)*sizeof(char));
-	 strcpy(swap, a);
-	 a = realloc(a,(b_length+1)*sizeof(char));
-	 strcpy(a,b);
-	 b = realloc(b,(a_length+1)*sizeof(char));
-	 strcpy(b,swap);
-	 free(swap);
-	 
+	 char *temp = *a;
+	 *a=*b;
+	 *b = temp;
 }
 
 void string_sort(char** arr,const int len,int (*cmp_func)(const char* a, const char* b)){
@@ -105,7 +96,7 @@ void string_sort(char** arr,const int len,int (*cmp_func)(const char* a, const c
 		
 			if(((*cmp_func)(arr[i],arr[i+1]))>0){
 			
-				swap_string(arr[i],arr[i+1]);
+				swap_string(&arr[i],&arr[i+1]);
 				is_finished=0;
 				
 			}
