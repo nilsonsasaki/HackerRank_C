@@ -7,6 +7,7 @@
 
 char* kth_word_in_mth_sentence_of_nth_paragraph(char**** document, int k, int m, int n) {
 
+	return(document[n][b][k]);
 }
 
 char** kth_sentence_in_mth_paragraph(char**** document, int k, int m) { 
