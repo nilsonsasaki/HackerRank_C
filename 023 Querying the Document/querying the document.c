@@ -20,9 +20,35 @@ char*** kth_paragraph(char**** document, int k) {
 	return(document[k-1]);
 }
 
+char **string_divider(char *str,int *divisions_counter,char *divisor_caracters){
+
+  char *dv_ptr;
+  char **divided_str =(char**)malloc(1001*sizeof(char*));
+  dv_ptr = strtok (str,divisor_caracters);
+  *divided_str=dv_ptr;
+  int i=1;
+  while (dv_ptr != NULL)
+  {
+    dv_ptr = strtok (NULL, divisor_caracters);
+    if(dv_ptr == NULL){
+   
+    	break;
+    }
+    *(divided_str+i)=dv_ptr;
+    i++;
+  }
+  divided_str = realloc(divided_str,i*sizeof(char*));
+  *divisions_counter=i;
+  return(divided_str);
+}
+
 char**** get_document(char* text) {
 
+	assert(text!=NULL);
+	char ****document =(char****) malloc(sizeof(char***));
 	
+	return(document);
+
 }
 
 
