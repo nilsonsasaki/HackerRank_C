@@ -45,9 +45,46 @@ char **string_divider(char *str,int *divisions_counter,char *divisor_caracters){
 char**** get_document(char* text) {
 
 	assert(text!=NULL);
-	char ****document =(char****) malloc(sizeof(char***));
+
+	int *n =malloc(sizeof(int));
+	int paragraphs, *sentences, **words;
+	char *temp_ptr;
+	char ****document = (char****)malloc(sizeof(char***));
 	
-	return(document);
+	document = (char****)string_divider(text,n,"\n");
+	
+	paragraphs = *n;
+
+	sentences = (int*)malloc(paragraphs*sizeof(int));
+	words=(int**)malloc(paragraphs*sizeof(int*));
+	
+	for(int i=0;i<paragraphs;i++){
+	
+		temp_ptr = (char*)document[i];
+		document[i]=(char***)string_divider(temp_ptr,n,".");
+		*(sentences+i) = *n;
+	}
+	
+	for(int i=0;i<paragraphs;i++){
+	
+		words[i]=(int*)malloc(sentences[i]*sizeof(int));
+	}
+	
+	for(int i=0;i<paragraphs;i++){
+	
+		for (int j=0;j<sentences[i];j++){
+		
+			temp_ptr=(char*)document[i][j];
+			document[i][j]=string_divider(temp_ptr,n," ");
+			words[i][j] = *n;
+		}
+	
+	}
+	free(words);
+	free(sentences);
+	free(n);
+	
+  return(document);
 
 }
 
